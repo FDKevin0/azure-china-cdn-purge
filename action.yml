@@ -1,0 +1,35 @@
+# action.yml
+name: 'Azure China CDN Purge'
+description: 'Azure China CDN Purge'
+author: 'FDKevin0'
+    
+branding:
+  icon: refresh-cw
+  color: red
+  
+inputs:
+  subscriptionId:
+    description: 'The subscription ID'
+    required: true
+  endpointId:
+    description: 'The endpoint ID'
+    required: true
+  path:
+    description: 'Purge path'
+    required: true
+  keyId:
+    description: 'API key ID'
+    required: true
+  keyValue:
+    description: 'API key value'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: 'git@github.com:FDKevin0/AzureChinaCDN.git'
+    - name: 
+      shell: bash
+      run: python3 AzureChinaCDN/CDNPurge.py ${{ inputs.subscriptionId }} ${{ inputs.endpointId }} ${{ inputs.path }} ${{ inputs.keyId }} ${{ inputs.keyValue }}
