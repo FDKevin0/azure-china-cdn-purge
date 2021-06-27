@@ -6,7 +6,7 @@ author: 'FDKevin0'
 branding:
   icon: refresh-cw
   color: red
-  
+
 inputs:
   subscriptionId:
     description: 'The subscription ID'
@@ -25,11 +25,11 @@ inputs:
     required: true
 
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
-    - uses: actions/checkout@v2
-      with:
-        repository: 'git@github.com:FDKevin0/AzureChinaCDN.git'
-    - name: 
+    - name: Get Depend Code
+      shell: bash
+      run: git clone git@github.com:FDKevin0/AzureChinaCDN.git
+    - name: Purge CDN
       shell: bash
       run: python3 AzureChinaCDN/CDNPurge.py ${{ inputs.subscriptionId }} ${{ inputs.endpointId }} ${{ inputs.path }} ${{ inputs.keyId }} ${{ inputs.keyValue }}
